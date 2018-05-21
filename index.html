@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Cube3d</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    
+    <style>
+        
+        
+.container {
+	position: relative;
+	margin: 100px auto;
+	width: 300px;
+	height: 300px;
+	perspective: 500px;
+}
+
+.parent {
+	width: inherit;
+	height: inherit;
+    transition: transform 2s linear;
+	transform-style: preserve-3d;
+    margin-left: 30px;
+}
+
+.face {
+	position: absolute;
+	width: inherit;
+	height: inherit;
+	border: 2px solid black;
+	font: normal 70px Arial;
+	text-align: center;
+	line-height: 300px;
+	color: black;
+    z-index: 1000;
+    opacity: 0.7;
+}
+
+.front {
+	transform: translateZ(150px);
+    background-color: #FFEF61;
+}
+
+.back {
+	transform: rotateY(180deg) translateZ(150px);
+    background-color: #AB00E8;
+}
+
+.right {
+	transform: rotateY(90deg) translateZ(150px);
+    background-color: #42FF3E;
+}
+
+.left {
+	transform: rotateY(-90deg) translateZ(150px);
+    background-color: #FFFF;
+}
+
+.top {
+	transform: rotateX(90deg) translateZ(150px);
+    background-color: #E85A47;
+}
+
+.bottom {
+	transform: rotateX(-90deg) translateZ(150px);
+    background-color: #31F4FF;
+}
+
+        .fleche{
+            cursor: pointer;
+            z-index: 0;
+            width: 0; 
+            height: 0;
+            
+        }
+        #fleche1{
+            display: inline;
+            border-right: 100px solid #E85A47;
+            border-top: 150px solid transparent;
+            border-bottom: 150px solid transparent; 
+            position: relative;
+            left: 0%;
+            top: 50%;
+            
+        }
+        #fleche2{
+            
+             border-left: 100px solid #FFEF61;
+             border-top: 150px solid transparent;
+             border-bottom: 150px solid transparent; 
+             right: 0%;
+        }
+        #fleche3{
+            border-bottom: 120px solid #31F4FF; 
+            border-left: 150px solid transparent; 
+            border-right: 150px solid transparent; 
+            position: relative;
+            left: 50%;
+            transform: translate(-50%);
+            
+        }
+        #fleche4{
+            
+            border-top: 120px solid #AB00E8;
+            border-left: 150px solid transparent; 
+            border-right: 150px solid transparent; 
+            position: relative;
+            left: 50%;
+            transform: translate(-50%);
+            
+            
+        }
+        .row-mid{
+            
+            align-items: center;
+            padding-bottom: 15px;
+        }
+        .ligne{
+            position: relative;
+            height: 550px; 
+        }
+    </style>
+    
+    
+</head>
+
+
+<body>
+ 
+ <div class="ligne container-fluid">
+   <div class="row row-top">
+       <div class="fleche" id='fleche3' onclick="turnTop()"></div>
+   </div>
+   
+   <div class="row row-mid">
+    <div class="fleche col-lg-4" id='fleche1' onclick="turnLeft()"></div>
+    <div class="container col-lg-3">
+      <div class="parent">
+        <div class="face front">1</div>
+        <div class="face back">2</div>
+        <div class="face right">3</div>
+        <div class="face left">4</div>
+        <div class="face top">5</div>
+        <div class="face bottom">6</div>
+      </div>
+    </div>
+    <div class="fleche col-lg-4" id='fleche2' onclick="turnRight()"></div>
+   </div> 
+    
+    <div class="row">
+        <div class="fleche " id='fleche4' onclick="turnDown()"></div>
+    </div>
+    
+
+</div>
+
+    
+    <script>
+        
+            var rotateY = 0, rotateX = 0;
+
+            document.onkeydown = function (e) {
+                if (e.keyCode === 37) {rotateY -= 90}
+                else if (e.keyCode === 38) {rotateX += 90}
+                else if (e.keyCode === 39) {rotateY += 90}
+                else if (e.keyCode === 40) {rotateX -= 90}
+
+                document.querySelector('.parent').style.transform = 
+              'rotateY(' + rotateY + 'deg)'+
+              'rotateX(' + rotateX + 'deg)';
+            }
+        
+        
+        function turnLeft(){
+            console.log("Left");
+            rotateY += 90;
+            document.querySelector('.parent').style.transform = 
+                                'rotateY(' + rotateY + 'deg)'+
+                                'rotateX(' + rotateX + 'deg)';
+        }
+        function turnRight(){
+            console.log("right");
+            rotateY -= 90;
+            document.querySelector('.parent').style.transform = 
+                                'rotateY(' + rotateY + 'deg)'+
+                                'rotateX(' + rotateX + 'deg)';
+        }
+        function turnTop(){
+            console.log("top");
+            rotateX -= 90;
+            document.querySelector('.parent').style.transform = 
+                                'rotateY(' + rotateY + 'deg)'+
+                                'rotateX(' + rotateX + 'deg)';
+        }
+        function turnDown(){
+            console.log("down");
+            rotateX += 90;
+            document.querySelector('.parent').style.transform = 
+                                'rotateY(' + rotateY + 'deg)'+
+                                'rotateX(' + rotateX + 'deg)';
+        }
+        document.querySelector('.parent').style.transform = 
+              'rotateY(' + rotateY + 'deg)'+
+              'rotateX(' + rotateX + 'deg)';
+    </script>
+</body>
+</html>
+
+
